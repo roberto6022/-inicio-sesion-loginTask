@@ -1,0 +1,42 @@
+{% load static %}
+
+<html>
+
+  <head>
+    <!-- Meta tags for character set and title -->
+    <meta charset="utf-8">
+    <title>tasks</title>
+
+    <!-- Static files: CSS stylesheets -->
+    <link rel="stylesheet" href="{% static 'tasks/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'tasks/css/style.css' %}">
+  </head>
+
+  <body>
+    <!-- Navigation section -->
+    <nav>
+      <ul>
+        {% if user.is_authenticated %}
+        <!-- Display links for authenticated users -->
+        <li><a href="{% url 'tasks:index' %}">Tasks List</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        <li><a href="{% url 'user_detail' user.pk %}">Member Information</a></li>
+        {% else %}
+        <!-- Display links for non-authenticated users -->
+        <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <!-- Main content section -->
+    <main>
+      <div class="all-contanier">
+        <!-- Block for individual pages to override -->
+        {% block main %}
+        {% endblock %}
+      </div>
+    </main>
+  </body>
+
+</html>
